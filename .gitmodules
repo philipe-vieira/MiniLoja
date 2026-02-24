@@ -1,0 +1,9 @@
+[submodule "back"]
+	path = back
+	url = git@github.com:philipe-vieira/MiniLoja-back.git
+	branch = main
+
+[submodule "front"]
+	path = front
+	url = git@github.com:philipe-vieira/MiniLoja-front.git
+	branch = main
