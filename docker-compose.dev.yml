@@ -36,7 +36,7 @@ services:
 
   back:
     build:
-      context: ./back
+      context: ./backend
       dockerfile: Dockerfile
       target: deps
     container_name: miniloja-back-dev
@@ -50,7 +50,7 @@ services:
       REDIS_URL: ${REDIS_URL}
       CHOKIDAR_USEPOLLING: "true"
     volumes:
-      - ./back:/app
+      - ./backend:/app
       - back_node_modules:/app/node_modules
     ports:
       - "${BACK_PORT}:${BACK_INTERNAL_PORT}"
@@ -65,7 +65,7 @@ services:
           "CMD",
           "node",
           "-e",
-          "fetch('http://127.0.0.1:' + (process.env.PORT || 3000)).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+          "fetch('http://127.0.0.1:' + (process.env.PORT || 3000) + '/hello').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
         ]
       interval: 10s
       timeout: 5s
@@ -76,7 +76,7 @@ services:
 
   front:
     build:
-      context: ./front
+      context: ./frontend
       dockerfile: Dockerfile
       target: deps
     container_name: miniloja-front-dev
@@ -89,7 +89,7 @@ services:
       NEXT_TELEMETRY_DISABLED: "1"
       WATCHPACK_POLLING: "true"
     volumes:
-      - ./front:/app
+      - ./frontend:/app
       - front_node_modules:/app/node_modules
     ports:
       - "${FRONT_PORT}:${FRONT_INTERNAL_PORT}"
