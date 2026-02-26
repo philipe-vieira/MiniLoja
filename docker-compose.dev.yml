@@ -42,7 +42,7 @@ services:
     container_name: miniloja-back-dev
     command: >
       sh -c "if [ ! -d node_modules ] || [ -z \"$(ls -A node_modules 2>/dev/null)\" ];
-      then npm ci; fi && npm run start:dev"
+      then npm ci; fi && npx prisma generate && npm run start:dev"
     environment:
       NODE_ENV: ${BACK_NODE_ENV}
       PORT: ${BACK_INTERNAL_PORT}
